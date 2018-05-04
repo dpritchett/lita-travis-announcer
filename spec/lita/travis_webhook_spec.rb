@@ -15,7 +15,7 @@ describe Lita::TravisWebhook do
     expect(subject.working?).to be_truthy
     expect(subject.broken?).to be_falsey
   end
-
+ 
   context 'a failed build' do
     let(:input_path) { 'travis_failure' }
 

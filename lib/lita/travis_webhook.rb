@@ -16,6 +16,14 @@ module Lita
       status_message
     end
 
+    def repo_name
+      repository.fetch 'name'
+    end
+
+    def notification_string
+      "*#{description}* [#{repo_name}] >> #{message} >> (#{compare_url})"
+    end
+
     def working?
       %w[Pending Passed Fixed].include? status_message
     end

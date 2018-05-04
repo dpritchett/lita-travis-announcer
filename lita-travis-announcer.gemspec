@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'lita-travis-announcer'
-  spec.version       = '0.1.0'
+  spec.version       = '1.0.0'
   spec.authors       = ['Daniel J. Pritchett']
   spec.email         = ['dpritchett@gmail.com']
   spec.description   = 'Chatops tools for announcing and deploying successful software builds'

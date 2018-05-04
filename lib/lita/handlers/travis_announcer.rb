@@ -4,7 +4,7 @@ module Lita
   module Handlers
     class TravisAnnouncer < Handler
 
-      config :travis_room, default: '#general'
+      config :travis_room, default: 'shell'
 
       http.post '/travis-announcer/travis', :travis_webhook
 
@@ -17,17 +17,13 @@ module Lita
       end
 
       def handle_travis_build(hook)
-        if hook.working?
-          announce "we did it, twitch!"
-        else
-          announce "it was a bad build."
-        end
+        announce '*Broken build!*' if hook.broken?
+        announce hook.notification_string
       end
 
       def announce(message)
-        msg = "Received announcement: #{message}"
-        puts msg
-        robot.send_message Source.new(room: '#general'), msg
+        Lita.logger.debug "Received announcement: #{message}"
+        robot.send_message Source.new(room: '#general'), message
       end
 
       Lita.register_handler(self)
