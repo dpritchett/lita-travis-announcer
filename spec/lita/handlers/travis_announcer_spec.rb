@@ -5,13 +5,6 @@ require 'json'
 describe Lita::Handlers::TravisAnnouncer, lita_handler: true do
   let(:robot) { Lita::Robot.new(registry) }
 
-  def load_fixture(name)
-    path = File.join('spec', 'fixtures', "#{name}.json")
-    as_text = open(path).readlines.join("\n")
-
-    result = Lita::TravisWebhook.new(as_text)
-  end
-
   describe 'routes' do
     it {
       is_expected.to route_http(:post, '/travis-announcer/travis')

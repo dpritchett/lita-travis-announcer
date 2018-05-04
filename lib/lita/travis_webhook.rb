@@ -3,14 +3,13 @@ require 'pry'
 require 'ostruct'
 
 module Lita
-  class TravisWebhook
-    def initialize(plaintext)
-      @raw_json = plaintext
-      @parsed = JSON.load plaintext
-      @ostruct = OpenStruct.new parsed
+  class TravisWebhook < OpenStruct
+    def initialize(parsed_json)
+      @parsed_json = parsed_json
+      @ostruct = super
     end
 
-    attr_reader :raw_json, :parsed, :ostruct
+    attr_reader :parsed_json, :ostruct
 
     def description
       status_message
@@ -33,19 +32,7 @@ module Lita
     end
 
     def keys
-      parsed.keys
-    end
-
-    def method_missing(m, *args, &block)
-      if ostruct.respond_to? m
-        ostruct.send m, *args, &block
-      else
-        super
-      end
-    end
-
-    def respond_to_missing?(*_args)
-      true
+      parsed_json.keys
     end
   end
 end

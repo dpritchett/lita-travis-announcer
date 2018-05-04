@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe Lita::TravisWebhook do
   let(:input_path) { 'travis_success' }
@@ -53,7 +52,7 @@ describe Lita::TravisWebhook do
       let(:input_path) { 'travis_malformed' }
 
       it 'throws an error when parsing' do
-        expect{ subject.description }.to raise_error JSON::ParserError
+        expect { subject.description }.to raise_error JSON::ParserError
       end
     end
   end
