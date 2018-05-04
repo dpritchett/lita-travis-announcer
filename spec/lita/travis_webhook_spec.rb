@@ -1,8 +1,11 @@
 require 'spec_helper'
+require 'json'
 
 describe Lita::TravisWebhook do
   let(:input_path) { 'travis_success' }
-  let(:json_input) { load_fixture input_path }
+  let(:raw_input) { load_fixture input_path }
+  let(:json_input) { JSON.parse raw_input }
+
   subject { Lita::TravisWebhook.new json_input }
 
   it 'should parse a known good response' do

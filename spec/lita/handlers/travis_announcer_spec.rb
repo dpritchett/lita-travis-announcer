@@ -5,27 +5,46 @@ require 'json'
 describe Lita::Handlers::TravisAnnouncer, lita_handler: true do
   let(:robot) { Lita::Robot.new(registry) }
 
-  describe 'routes' do
+  describe 'http routes' do
     it {
       is_expected.to route_http(:post, '/travis-announcer/travis')
-        .to(:travis_webhook)
+        .to(:parse_travis_webhook)
     }
-
-    #it {
-      #is_expected.to(route('Lita play url http://zombo.com')
-        #.to(:handle_sonos_play_url))
-    #}
   end
 
-  describe 'travis webhooks' do
-    it 'should deal with the incoming json payload' do
-      result = load_fixture('travis_success')
+  context 'dummy post request' do
+    let(:request) { double 'post request' }
+    let(:response) { double 'post response' }
+    let(:payload) { load_fixture 'travis_success' }
+
+    before do
+      request.stub_chain(:params, :fetch) { payload }
+      response.stub :write
     end
-  end
 
-  describe 'announcing build results' do
-    it 'should work idk' do
-      subject.announce 'hi there'
+    it 'replies to the POSTer with the parsed notification text' do
+      expect(response).to receive(:write).with(/ruby-bookbot/)
+      subject.parse_travis_webhook(request, response)
+    end
+
+    it 'calls :handle_travis_build' do
+      expect(subject).to receive(:handle_travis_build)
+      subject.parse_travis_webhook(request, response)
+    end
+
+    it 'lets shares the build info in chat' do
+      expect(subject).to receive(:announce)
+        .with(/ruby-bookbot.+some Travis magic/i)
+      subject.parse_travis_webhook(request, response)
+    end
+
+    context 'the dummy post is a failed build' do
+      let(:payload) { load_fixture 'travis_failure' }
+
+      it 'lets folks know about the failure in chat before pasting the link' do
+        expect(subject).to receive(:announce).exactly(2).times
+        subject.parse_travis_webhook(request, response)
+      end
     end
   end
 end

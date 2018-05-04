@@ -8,6 +8,5 @@ Lita.version_3_compatibility_mode = false
 # load a webhook fixture from a JSON file
 def load_fixture(name)
   path = File.join('spec', 'fixtures', "#{name}.json")
-   raw_text = open(path).readlines.join("\n")
-   JSON.load raw_text
+  open(path).readlines.join("\n")
 end
