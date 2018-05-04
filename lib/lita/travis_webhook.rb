@@ -11,6 +11,11 @@ module Lita
 
     attr_reader :parsed_json, :ostruct
 
+    def self.from_string(raw_json)
+      parsed = JSON.parse(raw_json)
+      new parsed
+    end
+
     def description
       status_message
     end

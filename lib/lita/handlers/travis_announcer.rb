@@ -6,19 +6,18 @@ module Lita
 
       config :travis_room, default: 'shell'
 
-      http.post '/travis-announcer/travis', :travis_webhook
+      http.post '/travis-announcer/travis', :parse_travis_webhook
 
-      route /talk_travis/, :talk_travis
-
-      def travis_webhook(request, response)
+      def parse_travis_webhook(request, response)
         raw_json = request.params.fetch('payload')
-        travis_hook = Lita::TravisWebhook.new(raw_json)
-        handle_travis_build(travis_hook)
+        travis_hook = Lita::TravisWebhook.from_string(raw_json)
+        response.write handle_travis_build(travis_hook)
       end
 
       def handle_travis_build(hook)
         announce '*Broken build!*' if hook.broken?
         announce hook.notification_string
+        hook.notification_string
       end
 
       def announce(message)
