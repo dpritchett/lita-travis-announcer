@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'pry'
 require 'json'
 
-describe Lita::Handlers::Shipit, lita_handler: true do
+describe Lita::Handlers::TravisAnnouncer, lita_handler: true do
   let(:robot) { Lita::Robot.new(registry) }
 
   def load_fixture(name)
@@ -14,7 +14,7 @@ describe Lita::Handlers::Shipit, lita_handler: true do
 
   describe 'routes' do
     it {
-      is_expected.to route_http(:post, '/shipit/travis')
+      is_expected.to route_http(:post, '/travis-announcer/travis')
         .to(:travis_webhook)
     }
 
@@ -27,7 +27,6 @@ describe Lita::Handlers::Shipit, lita_handler: true do
   describe 'travis webhooks' do
     it 'should deal with the incoming json payload' do
       result = load_fixture('travis_success')
-      binding.pry
     end
   end
 

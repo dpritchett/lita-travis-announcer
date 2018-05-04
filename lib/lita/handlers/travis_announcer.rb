@@ -2,11 +2,11 @@ require 'pry'
 
 module Lita
   module Handlers
-    class Shipit < Handler
+    class TravisAnnouncer < Handler
 
       config :travis_room, default: '#general'
 
-      http.post '/shipit/travis', :travis_webhook
+      http.post '/travis-announcer/travis', :travis_webhook
 
       route /talk_travis/, :talk_travis
 

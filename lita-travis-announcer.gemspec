@@ -1,11 +1,11 @@
 Gem::Specification.new do |spec|
-  spec.name          = 'lita-shipit'
+  spec.name          = 'lita-travis-announcer'
   spec.version       = '0.1.0'
   spec.authors       = ['Daniel J. Pritchett']
   spec.email         = ['dpritchett@gmail.com']
   spec.description   = 'Chatops tools for announcing and deploying successful software builds'
   spec.summary       = 'Chatops tools for announcing and deploying successful software builds'
-  spec.homepage      = 'https://github.com/dpritchett/lita-shipit'
+  spec.homepage      = 'https://github.com/dpritchett/lita-travis-announcer'
   spec.license       = 'MIT'
   spec.metadata      = { 'lita_plugin_type' => 'handler' }
 

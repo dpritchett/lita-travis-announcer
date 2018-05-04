@@ -15,8 +15,8 @@
     ],
     "notifications": {
       "webhooks": [
-        "http:\/\/bookbot.pritchettbots.com\/shipit\/travis",
-        "http:\/\/7c7e83e9.ngrok.io\/shipit\/travis"
+        "http:\/\/bookbot.pritchettbots.com\/travis-announcer\/travis",
+        "http:\/\/7c7e83e9.ngrok.io\/travis-announcer\/travis"
       ]
     }
   },
@@ -71,8 +71,8 @@
         ],
         "notifications": {
           "webhooks": [
-            "http:\/\/bookbot.pritchettbots.com\/shipit\/travis",
-            "http:\/\/7c7e83e9.ngrok.io\/shipit\/travis"
+            "http:\/\/bookbot.pritchettbots.com\/travis-announcer\/travis",
+            "http:\/\/7c7e83e9.ngrok.io\/travis-announcer\/travis"
           ]
         }
       },

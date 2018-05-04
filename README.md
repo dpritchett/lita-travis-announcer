@@ -1,15 +1,15 @@
-# lita-shipit
+# lita-travis-announcer
 
-[![Build Status](https://travis-ci.org/dpritchett/lita-shipit.png?branch=master)](https://travis-ci.org/dpritchett/lita-shipit)
+[![Build Status](https://travis-ci.org/dpritchett/lita-travis-announcer.png?branch=master)](https://travis-ci.org/dpritchett/lita-travis-announcer)
 
 TODO: Add a description of the plugin.
 
 ## Installation
 
-Add lita-shipit to your Lita instance's Gemfile:
+Add lita-travis-announcer to your Lita instance's Gemfile:
 
 ``` ruby
-gem "lita-shipit"
+gem "lita-travis-announcer"
 ```
 
 ## Configuration
